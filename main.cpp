@@ -373,30 +373,90 @@ int main()
             }
         } // удаление элемента из множества
 
-        if(var==6)
+        if(var==5)
         {
             char nazv;
-            cout<<"Введите название множества, которое хотите вывести: ";
+            cout<<"Введите название множества, булеан которого хотите вывести: ";
             cin>>nazv;
 
-            bool flag=true;
-
-            for(list x: sets)
-            {
-                if((x.head)->bukva==nazv)
-                {
-                    flag=false;
-                    break;
-                }
-            }
-
-            if(flag) cout<<"Множества с таким названием не существует!\n";
+            if(proverka1(nazv,sets)) cout<<"Множества с таким названием не существует!\n";
 
             else
             {
+                vector<char> el;
+
                 for(list x: sets)
                 {
-                    if((x.head)->bukva==nazv) x.print();
+                    if((x.head)->bukva==nazv) el=elements(x);
+                }
+
+                int n=el.size();
+                unsigned int powSetSize = 1 << n; 
+                cout << "{ " << endl;
+
+                for (unsigned int i = 0; i < powSetSize; ++i) 
+                {
+                    cout << "  {";
+                    bool first = true;
+
+                    // Проверяем каждый бит числа 'i'
+                    for (int j = 0; j < n; ++j) 
+                    {
+                        // Если j-й бит равен 1, то выводим j-й элемент массива
+                        if ((i & (1 << j)) != 0) {
+                            if (!first) {
+                            cout << ", ";
+                        }
+
+                        cout << el[j];
+                        first = false;
+
+                        }
+                    }
+
+                    cout << "}" << (i + 1 < powSetSize ? "," : "") << endl;
+                }
+
+                cout << "}" << endl;
+            }
+        }
+
+        if(var==6)
+        {
+            cout<<"Напишите see, если хотите вывести все множества сразу: ";
+            string see;
+            cin>>see;
+
+            if(see=="see")
+            {
+                for(list x: sets) x.print();
+            }
+
+            else
+            {
+                char nazv;
+                cout<<"Введите название множества, которое хотите вывести: ";
+                cin>>nazv;
+
+                bool flag=true;
+
+                for(list x: sets)
+                {
+                    if((x.head)->bukva==nazv)
+                    {
+                        flag=false;
+                        break;
+                    }
+                }
+
+                if(flag) cout<<"Множества с таким названием не существует!\n";
+
+                else
+                {
+                    for(list x: sets)
+                    {
+                        if((x.head)->bukva==nazv) x.print();
+                    }
                 }
             }
         }
