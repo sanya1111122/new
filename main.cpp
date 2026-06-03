@@ -310,7 +310,30 @@ int main()
             cout<<"Введите символ, который хотите добавить: ";
             cin>>el;
 
+            vector<char> T;
+
+            for(list w: sets)
+            {
+                if(w.head->bukva==nazv)
+                {
+                    T=elements(w);
+                    break;
+                }
+            }
+
+            bool flag=true;
+
+            for(char m: T)
+            {
+                if(m==el)
+                {
+                    flag=false;
+                    break;
+                }
+            }
+
             if(proverka1(nazv,sets)) cout<<"Множества с таким названием не существует!\n";
+            else if(!flag) cout<<"Такой элемент уже есть в множестве!\n";
 
             else
             {
