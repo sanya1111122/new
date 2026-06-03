@@ -197,24 +197,24 @@ bool proverka1(char nazv,vector<list> sets)
 
 bool proverka2(char a,char b,vector<list> sets)
 {
-    bool flag1=true;
+    bool flag1=false;
 
     for(list x: sets)
     {
         if((x.head)->bukva==a)
         {
-            flag1=false;
+            flag1=true;
             break;
         }
     }
 
-    bool flag2=true;
+    bool flag2=false;
 
     for(list x: sets)
     {
         if((x.head)->bukva==b)
         {
-            flag2=false;
+            flag2=true;
             break;
         }
     }
@@ -446,7 +446,7 @@ int main()
 
         if(var==6)
         {
-            cout<<"Напишите see, если хотите вывести все множества сразу: ";
+            cout<<"Напишите see, если хотите вывести все множества сразу, иначе напишите see[название множества, которое хотите вывести]: ";
             string see;
             cin>>see;
 
@@ -455,17 +455,19 @@ int main()
                 for(list x: sets) x.print();
             }
 
+            else if(!(see[0]=='s' && see[1]=='e' && see[2]=='e' && see[3]=='[' && (see[4]>=65 && see[4]<=90) && see[5]==']')) cout<<"Функция введена неправильно!\n";
+
             else
             {
-                char nazv;
+                /*char nazv;
                 cout<<"Введите название множества, которое хотите вывести: ";
-                cin>>nazv;
+                cin>>nazv;*/
 
                 bool flag=true;
 
                 for(list x: sets)
                 {
-                    if((x.head)->bukva==nazv)
+                    if((x.head)->bukva==see[4])
                     {
                         flag=false;
                         break;
@@ -478,7 +480,7 @@ int main()
                 {
                     for(list x: sets)
                     {
-                        if((x.head)->bukva==nazv) x.print();
+                        if((x.head)->bukva==see[4]) x.print();
                     }
                 }
             }
@@ -490,7 +492,7 @@ int main()
             cout<<"Введите множества, для которых хотите найти объединение(через пробел): ";
             cin>>a>>b;
 
-            if(proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
+            if(!proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
 
             else
             {
@@ -538,7 +540,7 @@ int main()
             cout<<"Введите множества, для которых хотите найти пересечение(через пробел): ";
             cin>>a>>b;
 
-            if(proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
+            if(!proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
 
             else
             {
@@ -581,7 +583,7 @@ int main()
             cout<<"Введите множества, для которых хотите найти разность(через пробел): ";
             cin>>a>>b;
 
-            if(proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
+            if(!proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
 
             else
             {
@@ -625,7 +627,7 @@ int main()
             cout<<"Введите множества, для которых хотите сделать проверку на подмножество(через пробел, сначала множество проверяемое на подмножество): ";
             cin>>a>>b;
 
-            if(proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
+            if(!proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
 
             else
             {
@@ -637,6 +639,9 @@ int main()
                     if((x.head)->bukva==a) el_a=elements(x);
                     if((x.head)->bukva==b) el_b=elements(x);
                 }
+
+                sort(el_a.begin(),el_a.end());
+                sort(el_b.begin(),el_b.end());
             
                 if(el_a.size()>el_b.size()) cout<<"Множество "<<a<<" не является подмножеством "<<b<<"!\n";
 
@@ -661,7 +666,7 @@ int main()
             cout<<"Введите множества, для которых хотите сделать проверку на равенство(через пробел): ";
             cin>>a>>b;
 
-            if(proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
+            if(!proverka2(a,b,sets)) cout<<"Ошибка! Не все множества существуют!\n";
 
             else
             {
